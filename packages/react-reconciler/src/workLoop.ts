@@ -1,14 +1,14 @@
 import { beginWork } from './beginWork';
 import { completeWork } from './completeWork';
-import { FiberNode } from './fiber';
+import { createWorkInProgress, FiberNode, FiberRootNode } from './fiber';
 
 let workInProgress: FiberNode | null = null;
 
-function prepareFreshStack(fiber: FiberNode) {
-	workInProgress = fiber;
+function prepareFreshStack(root: FiberRootNode) {
+	workInProgress = createWorkInProgress(root.current, {});
 }
 
-function renderRoot(root: FiberNode) {
+function renderRoot(root: FiberRootNode) {
 	// 初始化
 	prepareFreshStack(root);
 
